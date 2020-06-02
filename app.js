@@ -10,6 +10,7 @@
 // npm install -g nodemon, nodemon will run app.js and if we make any change to our
 // file, we don't have to restart the server every time.
 // heroku create
+// heroku run ls
 // heroku log to debug
 
 
@@ -33,7 +34,16 @@ let commentRoutes = require("./routes/comments");
 let indexRoutes = require("./routes/index");
 
 mongoose.set("useUnifiedTopology" , true);
-mongoose.connect("mongodb://localhost/yelp_camp_v12", { useNewUrlParser: true });
+mongoose.connect("mongodb+srv://webdevdbuser:t7958510@cluster0-hcib5.mongodb.net/test?retryWrites=true&w=majority", { 
+	useNewUrlParser: true,
+	userCreateIndex: true
+}).then(() => {
+	console.log("connected to db");
+}).catch(err => {
+	console.log("ERROR", err.message);
+});
+			
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
