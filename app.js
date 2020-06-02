@@ -9,6 +9,7 @@
 // npm install connect-flash --save
 // npm install -g nodemon, nodemon will run app.js and if we make any change to our
 // file, we don't have to restart the server every time.
+// heroku create
 // heroku log to debug
 
 
