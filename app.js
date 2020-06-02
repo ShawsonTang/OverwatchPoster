@@ -38,7 +38,14 @@ let indexRoutes = require("./routes/index");
 
 console.log(process.env.DATABASEURL);
 mongoose.set("useUnifiedTopology" , true);
-mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
+mongoose.connect(process.env.DATABASEURL, { 
+	useNewUrlParser: true,
+	userCreateIndex: true
+}).then(() => {
+	console.log("connected to db");
+}).catch(err => {
+	console.log("ERROR", err.message);
+});
 // mongoose.connect("mongodb+srv://webdevdbuser:t7958510@cluster0-hcib5.mongodb.net/test?retryWrites=true&w=majority", { 
 // 	useNewUrlParser: true,
 // 	userCreateIndex: true
