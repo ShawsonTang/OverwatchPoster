@@ -16,6 +16,7 @@
 //export DATABASEURL=mongodb://localhost/yelp_camp_v12 in command line to create
 //an environment variable 
 
+// set the db url in heroku website or use heroku config:set DATABASEURL= in command line
 
 let express     = require("express"),
     app         = express(),
@@ -38,25 +39,15 @@ let indexRoutes = require("./routes/index");
 
 console.log(process.env.DATABASEURL);
 mongoose.set("useUnifiedTopology" , true);
-mongoose.connect(process.env.DATABASEURL, { 
+let url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v12";
+mongoose.connect(url, { 
 	useNewUrlParser: true,
 	userCreateIndex: true
 }).then(() => {
 	console.log("connected to db");
 }).catch(err => {
 	console.log("ERROR", err.message);
-});
-// mongoose.connect("mongodb+srv://webdevdbuser:t7958510@cluster0-hcib5.mongodb.net/test?retryWrites=true&w=majority", { 
-// 	useNewUrlParser: true,
-// 	userCreateIndex: true
-// }).then(() => {
-// 	console.log("connected to db");
-// }).catch(err => {
-// 	console.log("ERROR", err.message);
-// });
-
-			
-
+});		
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
