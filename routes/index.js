@@ -24,8 +24,8 @@ router.post("/register", function(req, res){
             return res.redirect("/register");
         }
         passport.authenticate("local")(req, res, function(){
-		    req.flash("success", "Welcome to YelpCamp" + user.username);
-		    res.redirect("/campgrounds"); 
+		    req.flash("success", "Welcome to OW PIC" + user.username);
+		    res.redirect("/pictures"); 
         });
     });
 });
@@ -40,7 +40,7 @@ router.get("/login", (req, res) => {
 // the middleware is from [passport.use(new localStrategy(User.authenticate()));]
 router.post("/login", passport.authenticate("local", 
 	{
-		successRedirect: "/campgrounds",
+		successRedirect: "/pictures",
 	 	failureRedirect: "/login"
 	}), 
 	// the callback here does not do anything, just as a reminder that there's a 
@@ -52,7 +52,7 @@ router.post("/login", passport.authenticate("local",
 router.get("/logout", (req, res) => {
 	req.logout();
 	req.flash("success", "Logged Out");
-	res.redirect("/campgrounds");
+	res.redirect("/pictures");
 });
 
 module.exports = router;

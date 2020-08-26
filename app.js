@@ -3,7 +3,7 @@
 // show dbs
 // use
 // show collections
-// db.campgrounds.drop() delete all the data.
+// db.pictures.drop() delete all the data.
 // db.dropDatabase() to delete the current db.
 // npm install method-override --save
 // npm install connect-flash --save
@@ -13,7 +13,7 @@
 // heroku run ls
 // heroku log to debug
 
-//export DATABASEURL=mongodb://localhost/yelp_camp_v12 in command line to create
+//export DATABASEURL=mongodb://localhost/ow_pics in command line to create
 //an environment variable 
 
 // set the db url in heroku website or use heroku config:set DATABASEURL= in command line
@@ -26,20 +26,20 @@ let express     = require("express"),
     passport    = require("passport"),
     localStrategy = require("passport-local"),
 	methodOverride = require("method-override"),
-    Campground  = require("./models/campground"),
+    picture  = require("./models/picture"),
     Comment     = require("./models/comment"),
     User        = require("./models/user"),
 	expressSession = require("express-session");
     seedDB      = require("./seeds");
 
 // requiring routes
-let campgroundRoutes = require("./routes/campgrounds");
+let pictureRoutes = require("./routes/pictures");
 let commentRoutes = require("./routes/comments");
 let indexRoutes = require("./routes/index");
 
 console.log(process.env.DATABASEURL);
 mongoose.set("useUnifiedTopology" , true);
-let url = process.env.DATABASEURL || "mongodb://localhost/yelp_camp_v12";
+let url = process.env.DATABASEURL || "mongodb://localhost/ow_pics";
 mongoose.connect(url, { 
 	useNewUrlParser: true,
 	userCreateIndex: true
@@ -92,20 +92,20 @@ res.locals.currentUser = req.user;  is our way of saying, make a letiable named 
 
 // to get the routes we defined in routes directory.
 
-// notice here we pass "/campgrounds" to get rid of the redundancy
-// so the routes in campgrounds are no longer "/campgrounds" anymore, but just "/"
-// we append "/campgrounds" to those routes.
-app.use("/campgrounds", campgroundRoutes);
+// notice here we pass "/pictures" to get rid of the redundancy
+// so the routes in pictures are no longer "/pictures" anymore, but just "/"
+// we append "/pictures" to those routes.
+app.use("/pictures", pictureRoutes);
 
 // So does this commentRoutes.
-app.use("/campgrounds/:id/comments", commentRoutes);
+app.use("/pictures/:id/comments", commentRoutes);
 
 app.use("/", indexRoutes);
 
 // in order to deploy in heroku, we have to write this way
 // run with PORT=3000 node app.js in local
 app.listen(process.env.PORT, process.env.IP, () => {
-	console.log("YelpCamp App has started!");
+	console.log("Overwatch Poster App has started!");
 });
 
 

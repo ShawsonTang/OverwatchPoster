@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-var Campground = require("./models/campground");
+var Picture = require("./models/picture");
 var Comment = require("./models/comment");
 
 var data = [
@@ -21,19 +21,19 @@ var data = [
 ];
 
 function seedDB() {
-	// remove all the campgrounds.
-	Campground.deleteMany({}, (err) => {
+	// remove all the pictures.
+	Picture.deleteMany({}, (err) => {
 		// if (err) {
 		// 	console.log(err);
 		// } else {
-		// 	console.log("removed campground");
-		// 	// add a few campgrounds
+		// 	console.log("removed picture");
+		// 	// add a few pictures
 		// 	data.forEach((seed) => {
-		// 		Campground.create(seed, (err, campground) => {
+		// 		Picture.create(seed, (err, picture) => {
 		// 			if (err) {
 		// 				console.log(err);
 		// 			} else {
-		// 				console.log("added a campground");
+		// 				console.log("added a picture");
 		// 				// create a comment
 		// 				Comment.create({
 		// 					text: "Great place, but no Internet",
@@ -42,8 +42,8 @@ function seedDB() {
 		// 					if (err) {
 		// 						console.log(err);
 		// 					} else {
-		// 						campground.comments.push(comment);
-		// 						campground.save();
+		// 						picture.comments.push(comment);
+		// 						picture.save();
 		// 						console.log("create new comment");
 		// 					}
 							

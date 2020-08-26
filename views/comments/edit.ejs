@@ -2,9 +2,9 @@
 <div class="container">
 	<div class="row">
 		<h1 style="text-align: center">Edit Comment</h1>
-		<!--The form will submit a "POST" request to "/campgrounds"  -->
+		<!--The form will submit a "POST" request to "/pictures"  -->
 		<div style="width: 30%; margin: 25px auto;">
-			<form action="/campgrounds/<%= campgroundId %>/comments/<%= comment._id %>?_method=PUT", method="POST">
+			<form action="/pictures/<%= pictureId %>/comments/<%= comment._id %>?_method=PUT", method="POST">
 				<div class="form-group">
 					<!-- Notice here we use comment[text] instead of text as the value of 
 					name property. This is because in this way, we store the value we need 
@@ -15,7 +15,7 @@
 					<button class="btn btn-lg btn-default btn-block">Submit</button>
 				</div>
 			</form>
-			<a href="/campgrounds">Go Back</a>
+			<a href="/pictures">Go Back</a>
 		</div>
 		
 	</div>		

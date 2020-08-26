@@ -1,22 +1,22 @@
-var Campground = require("../models/campground");
+var Picture = require("../models/picture");
 var Comment = require("../models/comment");
 
 // all middleware goes here
 var middlewareObj = {};
 
-// check campground ownership middleware
-middlewareObj.checkCampgroundOwnership = function (req, res, next) {	
+// check picture ownership middleware
+middlewareObj.checkPictureOwnership = function (req, res, next) {	
 	// check if the user logged in 
 	if (req.isAuthenticated()) {				
-		Campground.findById(req.params.id, (err, foundCampground) => {
+		Picture.findById(req.params.id, (err, foundPicture) => {
 			if (err) {
-				req.flash("error", "Campground not found");
+				req.flash("error", "picture not found");
 				res.redirect("back");
 			} else {
-				// check if the user own the campground
-				// foundCampground.author.id is an object
+				// check if the user own the picture
+				// foundpicture.author.id is an object
 				// while req.use.id is a string, so we cannot just use ===
-				if (foundCampground.author.id.equals(req.user.id)) {
+				if (foundPicture.author.id.equals(req.user.id)) {
 					next();
 				} else {
 					req.flash("error", "You don't have permission to do that");
@@ -40,7 +40,7 @@ middlewareObj.checkCommentOwnership = function (req, res, next) {
 				res.redirect("back");
 			} else {
 				// check if the user own the comment
-				// foundCampground.author.id is an object
+				// foundpicture.author.id is an object
 				// while req.use.id is a string, so we cannot just use ===
 				if (foundComment.author.id.equals(req.user.id)) {
 					next();

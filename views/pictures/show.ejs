@@ -2,7 +2,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-3">
-			<p class="lead">Yelp Camp</p>
+			<p class="lead">OW PIC</p>
 			<div class="list-group">
 				<li class="list-group-item active">info 1</li>
 				<li class="list-group-item">info 2</li>
@@ -11,20 +11,20 @@
 		</div>
 		<div class="col-md-9">
 			<div class="thumbnail">
-				<img class="image-responsive" src="<%= campground.image %>">
+				<img class="image-responsive" src="<%= picture.image %>">
 				<div class="caption-full">
-					<h4 class="pull-right">$<%= campground.price %>/night</h4>
-					<h4><a><%= campground.name %></a></h4>
-					<p><%= campground.description %></p>
+					<h4 class="pull-right">$<%= picture.price %>/piece</h4>
+					<h4><a><%= picture.name %></a></h4>
+					<p><%= picture.description %></p>
 					<p>
-						<em>Submittted By <%= campground.author.username%></em>
+						<em>Submittted By <%= picture.author.username%></em>
 					</p>
 					<!-- currentUser comes from app.use(req, res, next) in app.js 
 						if the user does not log in or does not own the post
 					edit and delete button will not show-->
-					<% if (currentUser && campground.author.id.equals(currentUser._id)) { %>
-						<a class="btn btn-xs btn-warning" href="/campgrounds/<%= campground._id %>/edit">Edit</a>
-						<form class="delete-form" action="/campgrounds/<%= campground._id %>/?_method=DELETE" method="POST">
+					<% if (currentUser && picture.author.id.equals(currentUser._id)) { %>
+						<a class="btn btn-xs btn-warning" href="/pictures/<%= picture._id %>/edit">Edit</a>
+						<form class="delete-form" action="/pictures/<%= picture._id %>/?_method=DELETE" method="POST">
 						<button class="btn btn-xs btn-danger">Delete</button>		
 						</form>
 					<% } %>
@@ -32,18 +32,18 @@
 			</div>
 			<div class="well">
 				<div class="text-right">
-					<a class="btn btn-success" href="/campgrounds/<%= campground._id %>/comments/new">Add New Comment</a>
+					<a class="btn btn-success" href="/pictures/<%= picture._id %>/comments/new">Add New Comment</a>
 				</div>
 				<hr>			
-				<% campground.comments.forEach((comment) => { %>
+				<% picture.comments.forEach((comment) => { %>
 					<div class="row">
 						<div class="col-mid-12">
 							<Strong><%= comment.author.username %></Strong>
 							<span class="pull-right">10 days ago</span>
 							<p><%= comment.text %></p>
 							<% if (currentUser && comment.author.id.equals(currentUser._id)) { %>
-								<a class="btn btn-xs btn-warning" href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit">Edit</a>
-								<form class="delete-form" action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
+								<a class="btn btn-xs btn-warning" href="/pictures/<%= picture._id %>/comments/<%= comment._id %>/edit">Edit</a>
+								<form class="delete-form" action="/pictures/<%= picture._id %>/comments/<%= comment._id %>?_method=DELETE" method="POST">
 									<input type="submit" class="btn btn-xs btn-danger" value="Delete">
 								</form>
 							<% } %>

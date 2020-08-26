@@ -1,6 +1,6 @@
 let mongoose = require("mongoose");
 //Schema Setup
-let campgroundSchema = new mongoose.Schema({
+let pictureSchema = new mongoose.Schema({
 	name: String,
 	price: String,
 	image: String,
@@ -20,4 +20,4 @@ let campgroundSchema = new mongoose.Schema({
 	]
 });
 // Send this model out of the file by useing module.exports
-module.exports = mongoose.model("Campground", campgroundSchema);
+module.exports = mongoose.model("Picture", pictureSchema);

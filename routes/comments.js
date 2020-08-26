@@ -3,7 +3,7 @@ var express = require("express");
 // this object will match the id with what we defined before
 // or the get new route will not be able to find the id because it is null
 var router = express.Router({mergeParams: true});
-var Campground = require("../models/campground");
+var Picture = require("../models/picture");
 var Comment = require("../models/comment");
 var middleware = require("../middleware");
 
@@ -14,22 +14,22 @@ var middleware = require("../middleware");
 
 // Comment New
 router.get("/new", middleware.isLoggedin, (req, res) => {
-	//find campground by id
-	Campground.findById(req.params.id, (err, foundCampground) => {
+	//find picture by id
+	Picture.findById(req.params.id, (err, foundPicture) => {
 		if (err) {
 			console.log(err);
 		} else {
-			res.render("comments/new", {campground: foundCampground});
+			res.render("comments/new", {picture: foundPicture});
 		}
 	});	
 });
 
 // Comment Create
 router.post("/", middleware.isLoggedin, (req, res) => {
-	Campground.findById(req.params.id, (err, foundCampground) => {
+	Picture.findById(req.params.id, (err, foundPicture) => {
 		if (err) {
 			console.log(err);
-			redirect("/campgrounds");
+			redirect("/pictures");
 		} else {
 			// Since we use name="comment[text]" and name="comment[author]"
 			// we pre-made the object so we can just use req.body.comment instead
@@ -45,10 +45,10 @@ router.post("/", middleware.isLoggedin, (req, res) => {
 					// save the comment
 					comment.save();
 					
-					foundCampground.comments.push(comment);
-					foundCampground.save();	
+					foundPicture.comments.push(comment);
+					foundPicture.save();	
 					req.flash("success", "Successfully added a comment");
-					res.redirect("/campgrounds/" + foundCampground._id);
+					res.redirect("/pictures/" + foundPicture._id);
 				}
 			});
 		}
@@ -61,9 +61,9 @@ router.get("/:comment_id/edit", middleware.checkCommentOwnership, (req, res) => 
 		if (err) {
 			res.redirect("back");
 		} else {
-			// req.params.id is the campground id we get from
-			// app.use("/campgrounds/:id/comments", commentRoutes) in app.js
-			res.render("comments/edit", {campgroundId: req.params.id, comment: foundComment});
+			// req.params.id is the picture id we get from
+			// app.use("/pictures/:id/comments", commentRoutes) in app.js
+			res.render("comments/edit", {pictureId: req.params.id, comment: foundComment});
 		}
 	});	
 });
@@ -74,7 +74,7 @@ router.put("/:comment_id", middleware.checkCommentOwnership, (req, res) => {
 		if (err) {
 			res.redirect("back");
 		} else {
-		   res.redirect("/campgrounds/" + req.params.id);
+		   res.redirect("/pictures/" + req.params.id);
 		}
 	});
 });
@@ -86,7 +86,7 @@ router.delete("/:comment_id", middleware.checkCommentOwnership, (req, res) => {
 			res.redirect("back");
 		} else {
 			req.flash("success", "Comment successfully deleted");
-			res.redirect("/campgrounds/" + req.params.id);
+			res.redirect("/pictures/" + req.params.id);
 		}
 	});
 });
