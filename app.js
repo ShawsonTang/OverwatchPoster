@@ -104,7 +104,7 @@ app.use("/", indexRoutes);
 
 // in order to deploy in heroku, we have to write this way
 // run with PORT=3000 node app.js in local
-app.listen(process.env.PORT, process.env.IP, () => {
+app.listen(3000, "127.0.0.1", () => {
 	console.log("Overwatch Poster App has started!");
 });
 
